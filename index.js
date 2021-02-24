@@ -6,32 +6,46 @@ class SortedList {
 
   add(item) {
     this.items.push(item);
-    this.items.sort((a, b) => a - b);
+    this.items.sort(function (a, b) {
+      return a - b;
+    });
     this.length = this.items.length;
   }
 
   get(pos) {
-    if (this.items.indexOf(pos)) {
-      this.items.indexOf(pos);
-    } else {
+    if (this.items.indexOf(pos) === -1) {
       throw new Error('OutOfBounds');
+    } else {
+      return this.items[pos];
     }
   }
 
   max() {
-   this.items.reduce((a, b) => Math.max(a, b) ? throw new Error('EmptySortedList'));
+    if (!this.items.length) {
+      throw new Error('EmptySortedList');
+    } else {
+      return Math.max(...this.items);
+    }
   }
 
   min() {
-    this.items.reduce((a, b) => Math.min(a, b) ? throw new Error('EmptySortedList'));
+    if (!this.items.length) {
+      throw new Error('EmptySortedList');
+    } else {
+      return Math.min(...this.items);
+    }
   }
 
   sum() {
-    this.items.reduce((a, b) => a + b);
+    return this.items.reduce((a, b) => a + b, 0);
   }
 
   avg() {
-    this.items.reduce((a, b) => a + b, 0) / this.length);
+    if (this.length) {
+      return this.sum() / this.length;
+    } else {
+      throw new Error('EmptySortedList');
+    }
   }
 }
 
